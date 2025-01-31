@@ -1,0 +1,104 @@
+* {
+padding: 0px 0px 0px 0px;
+box-sizing: border-box;
+margin: 0px 0px 0px 0px;
+transition: all 200ms;
+scroll-behavior: smooth;
+}
+*::after,
+*::before {
+padding: 0px 0px 0px 0px;
+box-sizing: border-box;
+margin: auto;
+}
+
+body {
+min-height: 100vh;
+width: min(100%, 100%);
+display: flex;
+align-items: center;
+justify-content: center;
+/* font-family: "Work Sans", serif; */
+font-style: normal;
+font-family: var(--primary-font-family);
+font-optical-sizing: auto;
+font-weight: normal;
+font-style: normal;
+flex-direction: column;
+gap: 0px;
+background-color: hsl(0, 0%, 100%);
+}
+
+main {
+min-height: 100vh;
+width: min(100%, 100%);
+display: flex;
+align-items: center;
+justify-content: flex-start;
+flex-direction: column;
+}
+
+:root {
+--primary-font-family: "Liter", serif,
+    sans-serif;
+--primary-darker-font-color: hsl(0, 0%, 20%);
+--primary-light-font-color: hsl(0, 0%, 50%);
+--primary-color: #2700b6;
+--primary-lighter-color: hsl(253, 100%, 80%);
+}
+
+#root {
+min-height: 100vh;
+width: min(100%, 100%);
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+}
+
+::-webkit-scrollbar {
+width: 0.4em;
+}
+::-webkit-scrollbar-thumb {
+width: 1em;
+background-color: var(--primary-light-font-color);
+border-radius: 10em;
+}
+
+button:active {
+scale: 0.8;
+}
+input {
+outline-style: none;
+}
+
+section {
+    min-height: 100vh;
+    width: min(100%, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: #fff;
+}
+section h1 {
+    font-size: 3.4em;
+    font-weight: calc(200 + 100);
+    color: hsl(0, 0%, 100%);
+    font-family: "Lilita One", serif;
+}
+section p {
+    font-size: 1em;
+    font-weight: normal;
+    max-width: 60em;
+}
+section a {
+    font-size: 1em;
+    font-weight: normal;
+    max-width: 60em;
+    text-decoration-color: none;
+    color: #fff;
+}

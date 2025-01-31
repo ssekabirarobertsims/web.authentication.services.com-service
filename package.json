@@ -1,0 +1,37 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "./controller/server/api.server.controller.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "dev": "nodemon ./controller/server/api.server.controller.js",
+    "start": "node ./controller/server/api.server.controller.js",
+    "build": "npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "apicache": "^1.6.3",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "compression": "^1.7.5",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.12.0",
+    "node": "^18.20.6",
+    "nodemailer": "^6.10.0",
+    "uuid": "^11.0.5",
+    "validator": "^13.12.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0"
+  }
+}
