@@ -4,24 +4,24 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { v4: uuid } = require("uuid");
 const validator = require("validator");
-require("dotenv").config();
+require("dotenv").config(); 
 const mailer = require("../middleware/mail/service.signup.mail.middleware.controller");
 const format = require("date-fns").format;
 
 module.exports = async function (request, response) {
     response.contentType = "Application/json";
     response.statusCode = Number.parseInt(201);
-    const { service, owner_username, owner_email, service_password, project, description } = request.body;
+    const { service, owner_username, owner_email, service_password, project } = request.body;
 
     try {
         const FoundService = await pool_connection.query("SELECT * FROM services WHERE service = ?", [service]);
         const salt = await bcrypt.genSalt();
         const hash = await bcrypt.hash(`${JSON.stringify(service_password)}`, salt);
 
-        if (!service || !owner_username || !owner_email || !service_password || !project || !description) {
+        if (!service || !owner_username || !owner_email || !service_password || !project) {
             return response.status(400).jsonp({
                 message: "bad request",
-                error: "service, owner_username, owner_email, service_password, project and description are all required!"
+                error: "service, owner_username, owner_email, service_password, and project name are all required!"
             });
         } else if (!validator.isEmail(owner_email)) {
             return response.status(400).jsonp({
@@ -58,37 +58,30 @@ module.exports = async function (request, response) {
                 message: "bad request",
                 error: "project name must be at most 20 characters or less!"
             });
-        } else if (description.length < 50) {
-            return response.status(400).jsonp({
-                message: "bad request",
-                error: "description must be at least 50 characters or more!"
-            });
-        } else if (description.length > 200) {
-            return response.status(400).jsonp({
-                message: "bad request",
-                error: "description must be at most 200 characters or less!"
-            });
         } else if (FoundService[0][0]?.length > 0 || FoundService[0][0]?.service === service) {
             return response.status(400).jsonp({
                 message: "bad request",
                 error: "service already exists in our databases!"
             });
         } else {
+            const description = "description";
+
             await pool_connection.query("INSERT INTO services (service_id, service, service_password, service_owner, service_owner_email, description, project_name, _date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [uuid(), service, hash, owner_username, owner_email, description, project, format(new Date(), "yyyy-MM-dd")]);
             // 
             await mailer(owner_email
-                , "Web Authentication Service Registration!", service);
+                , "Web Authentication Service", service, owner_username);
             // 
             response.status(201).jsonp({
-                message: "Service created successfully!",
+                message: "Service registered successfully!",
                 data: {
                     service: service,
                     owner_username: owner_username,
                     owner_email: owner_email,
                     project: project,
-                    description: description
+                    description: "Service description"
                 },
                 date: format(new Date(), "yyyy-MM-dd"),
+                signup_id: uuid()
             });
         }
 
@@ -96,6 +89,7 @@ module.exports = async function (request, response) {
         console.log(error);
         response.status(Number.parseInt(500))
             .json({
+                error: error.message,
                 message: "Error while creating service!"
             });
     }

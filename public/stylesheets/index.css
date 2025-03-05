@@ -1,79 +1,82 @@
 * {
-padding: 0px 0px 0px 0px;
-box-sizing: border-box;
-margin: 0px 0px 0px 0px;
-transition: all 200ms;
-scroll-behavior: smooth;
+    padding: 0px 0px 0px 0px;
+    box-sizing: border-box;
+    margin: 0px 0px 0px 0px;
+    transition: all 200ms;
+    scroll-behavior: smooth;
 }
+
 *::after,
 *::before {
-padding: 0px 0px 0px 0px;
-box-sizing: border-box;
-margin: auto;
+    padding: 0px 0px 0px 0px;
+    box-sizing: border-box;
+    margin: auto;
 }
 
 body {
-min-height: 100vh;
-width: min(100%, 100%);
-display: flex;
-align-items: center;
-justify-content: center;
-/* font-family: "Work Sans", serif; */
-font-style: normal;
-font-family: var(--primary-font-family);
-font-optical-sizing: auto;
-font-weight: normal;
-font-style: normal;
-flex-direction: column;
-gap: 0px;
-background-color: hsl(0, 0%, 100%);
+    min-height: 100vh;
+    width: min(100%, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* font-family: "Work Sans", serif; */
+    font-style: normal;
+    font-family: var(--primary-font-family);
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    flex-direction: column;
+    gap: 0px;
+    background-color: hsl(0, 0%, 100%);
 }
 
 main {
-min-height: 100vh;
-width: min(100%, 100%);
-display: flex;
-align-items: center;
-justify-content: flex-start;
-flex-direction: column;
+    min-height: 100vh;
+    width: min(100%, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
 :root {
---primary-font-family: "Liter", serif,
-    sans-serif;
---primary-darker-font-color: hsl(0, 0%, 20%);
---primary-light-font-color: hsl(0, 0%, 50%);
---primary-color: #2700b6;
---primary-lighter-color: hsl(253, 100%, 80%);
+    --primary-font-family: "Liter", serif,
+        sans-serif;
+    --primary-darker-font-color: hsl(0, 0%, 20%);
+    --primary-light-font-color: hsl(0, 0%, 50%);
+    --primary-color: hsl(0, 0%, 10%);
+    --primary-lighter-color: hsl(253, 100%, 80%);
 }
 
 #root {
-min-height: 100vh;
-width: min(100%, 100%);
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
+    min-height: 100vh;
+    width: min(100%, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 ::-webkit-scrollbar {
-width: 0.4em;
+    width: 0.4em;
 }
+
 ::-webkit-scrollbar-thumb {
-width: 1em;
-background-color: var(--primary-light-font-color);
-border-radius: 10em;
+    width: 1em;
+    background-color: var(--primary-light-font-color);
+    border-radius: 10em;
 }
 
 button:active {
-scale: 0.8;
+    scale: 0.8;
 }
+
 input {
-outline-style: none;
+    outline-style: none;
 }
 
 section {
-    min-height: 100vh;
+    min-height: 130vh;
     width: min(100%, 100%);
     display: flex;
     align-items: center;
@@ -84,21 +87,53 @@ section {
     background-color: var(--primary-color);
     color: #fff;
 }
+
 section h1 {
-    font-size: 3.4em;
+    font-size: 2.5em;
     font-weight: calc(200 + 100);
     color: hsl(0, 0%, 100%);
     font-family: "Lilita One", serif;
+    max-width: 23em;
 }
+
 section p {
-    font-size: 1em;
+    font-size: .9em;
     font-weight: normal;
-    max-width: 60em;
+    max-width: 49em;
+    color: hsl(0, 0%, 60%)
 }
-section a {
-    font-size: 1em;
-    font-weight: normal;
-    max-width: 60em;
-    text-decoration-color: none;
+
+section a :where(button) {
+    height: 3em;
+    width: 15em;
+    border: none !important;
+    background-color: #fff;
+    color: var(--primary-color);
+    border-radius: 3px !important;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.site-developer-navigation-component {
+    height: 4em;
+    width: 15em;
+    position: fixed;
+    bottom: 2em;
+    right: 0em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.site-developer-navigation-component>p {
+    font-size: .9em;
     color: #fff;
+    font-weight: normal;
+}
+
+.site-developer-navigation-component>a :where(img) {
+    height: 3em;
+    width: 3em;
+    border-radius: 100%;
 }

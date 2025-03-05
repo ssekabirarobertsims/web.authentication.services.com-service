@@ -7,7 +7,7 @@ const validator = require("validator");
 require("dotenv").config();
 const mailer = require("../middleware/mail/signup.mail.middleware.controller");
 const format = require("date-fns").format;
-
+ 
 module.exports = async function (request, response) {
     const { username, email, password, service_provider } = request.body;
 
@@ -22,7 +22,7 @@ module.exports = async function (request, response) {
         if (!username || !email || !password || !service_provider) {
             return response.status(400).jsonp({
                 message: "bad request",
-                error: "username, email, service_provider and password are required"
+                error: "username, email, service_provider and password are required!"
             });
         } else if (!validator.isEmail(email)) {
             return response.status(400).jsonp({
@@ -36,8 +36,8 @@ module.exports = async function (request, response) {
             });
         } else if (!validator.isStrongPassword(password)) {
             return response.status(400).jsonp({
-                message: "bad request",
-                error: "password must contain at least 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol!"
+                error: "password must contain at least 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol!",
+                message: "password must contain at least 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol!"
             });
         } else if (username.length < 4) {
             return response.status(400).jsonp({
@@ -60,8 +60,12 @@ module.exports = async function (request, response) {
                 error: "service provider does not exist!"
             });
         } else {
-            await pool_connection.query("INSERT INTO users (account_id, username, email, password, _date, service_provider) VALUES (?, ?, ?, ?, ?, ?)", [uuid(), username, email, hash, format(new Date(), "yyyy-MM-dd"), service_provider]);
+            await pool_connection.query(`
+                INSERT INTO users (account_id, username, email, password, _date, service_provider) VALUES (?, ?, ?, ?, ?, ?)
+                `, [uuid(), username, email, hash, format(new Date(), "yyyy-MM-dd"), service_provider]);
+
             await mailer(email, "Account Successfully Created! 🎉", username);
+
             response.status(201).jsonp({
                 message: "User created successfully!",
                 data: {
@@ -69,6 +73,9 @@ module.exports = async function (request, response) {
                     email: email
                 },
                 date: format(new Date(), "yyyy-MM-dd"),
+                service_provider: service_provider,
+                service_provider_platform: "Web Authentication Services",
+                signup_id: uuid(),
             });
         }
     } catch (error) {

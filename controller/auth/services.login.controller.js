@@ -27,7 +27,7 @@ module.exports = async function (request, response) {
         } else if (!FoundService) {
             return response.status(400).jsonp({
                 message: "bad request",
-                error: "service does not exist!"
+                error: "service does not exist in database!"
             });
         } else if (!PasswordMatch || PasswordMatch === false) {
             return response.status(400).jsonp({
@@ -38,19 +38,20 @@ module.exports = async function (request, response) {
             const token = jwt.sign({
                 service: service,
                 service_id: FoundService[0][0].service_id,
-                service_created: format(new Date(), "yyyy-MM-dd HH:mm:ss")
+                service_create_date: format(new Date(), "yyyy-MM-dd HH:mm:ss")
             }, process.env.REFRESH_TOKEN_SECRETE_KEY, {
-                expiresIn: "1h"
+                expiresIn: "1d"
             });
 
-            await mailer(FoundService[0][0]?.service_owner_email, " Web Authentication Service Login", FoundService[0][0]?.service);
+            await mailer(FoundService[0][0]?.service_owner_email, "Web Authentication Services", FoundService[0][0]?.service, FoundService[0][0]?.service_owner);
 
             return response.status(200).jsonp({
-                message: "service logged in successfully!",
+                message: "logged into service successfully!",
                 data: {
                     service: service,
                     service_id: FoundService[0][0]?.service_id,
                     login_date: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
+                    login_id: uuid(),
                     api_key: token,
                     owner: FoundService[0][0]?.service_owner,
                     owner_email: FoundService[0][0]?.service_owner_email,

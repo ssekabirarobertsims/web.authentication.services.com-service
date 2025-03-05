@@ -15,4 +15,4 @@ pool_connection.getConnection((error, connection) => {
         console.log("Connected to database successfully!")
 });
 
-module.exports = pool_connection.promise();
+module.exports = pool_connection.promise();  

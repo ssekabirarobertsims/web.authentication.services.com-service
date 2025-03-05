@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
+    secure: true,
     port: 465,
     host: "smtp.gmail.com",
     auth: {
@@ -25,6 +26,12 @@ module.exports = async function (to, subject, username) {
             html: `
                 <h1>Account Login!</h1>
                 <p>Hi ${username}, you have been able to log into your account successfully on ${format(new Date(), "yyyy-MM-dd")}</p>
+                <br />
+                <strong>Username: ${username}</strong>
+                <strong>Email: ${to}</strong>
+                <strong>Date: ${format(new Date(), "yyyy-MM-dd")}</strong>
+                <strong>Service Provider: <a href="https://web-auth-services.netlify.app" target="_blank">Web Authentication Services</a></strong>
+                <br />
                 <p>Thank you for using our platform!</p>
                 <br />
                 <a href="https://web-auth-services.netlify.app/" target="_blank">👉 Authentication Web Services</a>

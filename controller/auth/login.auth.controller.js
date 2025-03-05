@@ -7,7 +7,7 @@ const validator = require("validator");
 require("dotenv").config();
 const mailer = require("../middleware/mail/login.mail.middleware.controller");
 const format = require("date-fns").format;
-
+ 
 module.exports = async function (request, response) {
     const { email, password } = request.body;
 
@@ -37,14 +37,18 @@ module.exports = async function (request, response) {
                 error: "user with email does not exist in our databases!"
             });
         } else {
-            await mailer(email, "New Login Alert for Your Account!", FoundUser[0][0].username);
-            response.status(201).jsonp({
+            await mailer(email, "New Login Alert For Your Account!", FoundUser[0][0].username);
+
+            response.status(200).jsonp({
                 message: "User logged in successfully!",
                 data: {
                     login_id: uuid(),
                     account_id: FoundUser[0][0]?.account_id,
                     email: FoundUser[0][0]?.email,
+                    username: FoundUser[0][0]?.username,
+                    token: token,
                 },
+                service_provider_platform: "Web Authentication Services",
                 date: format(new Date(), "yyyy-MM-dd"),
             });
         }
