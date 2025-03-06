@@ -5,16 +5,16 @@ const { format } = require("date-fns");
 require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
-  port: 465,
-  host: "smtp.gmail.com",
-  auth: {
-    user: process.env.MAILER,
-    pass: process.env.MAILER_PASSWORD,
-  },
-  tls: {
-    rejectUnauthorized: false,
-  },
+    service: "gmail",
+    port: 465,
+    host: "smtp.gmail.com",
+    auth: {
+        user: process.env.MAILER,
+        pass: process.env.MAILER_PASSWORD
+    },
+    tls: {
+        rejectUnauthorized: false
+    }
 });
 
 module.exports = async function (to, subject, username) {
@@ -25,10 +25,7 @@ module.exports = async function (to, subject, username) {
       subject: subject,
       html: `
                 <h1>Account Login!</h1>
-                <p>Hi ${username}, you have been able to log into your account successfully on ${format(
-        new Date(),
-        "yyyy-MM-dd"
-      )}</p>
+                <p>Hi ${username}, you have been able to log into your account successfully on ${format(new Date(), "yyyy-MM-dd")}</p>
                 <p>Thank you for using our platform!</p>
                 <br />
                 <a href="https://web-auth-services.netlify.app/" target="_blank">👉 Authentication Web Services</a>

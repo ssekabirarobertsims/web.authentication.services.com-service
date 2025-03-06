@@ -40,12 +40,16 @@ application.use(
 application.use(
   express.static(require("node:path").join(__dirname, "../../public/"))
 );
+application.use(express.static(require("node:path").join(__dirname, "../../view/")));
+application.use(express.static(require("node:path").join(__dirname, "../../public/")));
+application.use(express.static(require("node:path").join(__dirname, "../../public/stylesheets")));
+application.use(express.static(require("node:path").join(__dirname, "../../public/photos")));
 application.set("port", 3500);
 
 //
 application.use("/", require("../routers/root.routers.controller"));
 application.use("/api", require("../routers/services.routers.controller"));
-
+ 
 application.use(require("../middleware/error/404.middleware.controller"));
 
 server.listen(application.get("port"), () => {
