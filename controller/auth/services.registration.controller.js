@@ -1,4 +1,5 @@
 "use strict";
+debugger;
 const pool_connection = require("../../model/connection/model.connection");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");

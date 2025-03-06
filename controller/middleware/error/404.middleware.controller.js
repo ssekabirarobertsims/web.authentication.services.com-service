@@ -1,4 +1,5 @@
 "use strict";
+debugger;
 module.exports = async function (request, response) {
     response.contentType = ["plain/text", "text/html", "Application/json"];
     response.statusCode = Number.parseInt(404);
