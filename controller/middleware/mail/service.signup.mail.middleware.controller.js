@@ -5,29 +5,31 @@ require("dotenv").config();
 const { format } = require("date-fns");
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
-    port: 465,
-    secure: true,
-    host: "smtp.gmail.com",
-    auth: {
-        user: process.env.MAILER,
-        pass: process.env.MAILER_PASSWORD
-    },
-    tls: {
-        rejectUnauthorized: false
-    }
+  service: "gmail",
+  port: 465,
+  secure: true,
+  host: "smtp.gmail.com",
+  auth: {
+    user: process.env.MAILER,
+    pass: process.env.MAILER_PASSWORD,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
 });
 
 module.exports = async function (to, subject, service, owner_username) {
-    try {
-        await transporter.sendMail({
-            from: process.env.MAILER,
-            to: to,
-            subject: subject,
-            html: `
+  try {
+    await transporter.sendMail({
+      from: process.env.MAILER,
+      to: to,
+      subject: subject,
+      html: `
                 <h1>Welcome to Authentication Web Services</h1>
                 <p>
-                    Dear ${String(owner_username).toLocaleLowerCase()}, welcome to the platform! We’re thrilled to have you on board.
+                    Dear ${String(
+                      owner_username
+                    ).toLocaleLowerCase()}, welcome to the platform! We’re thrilled to have you on board.
                     Your service has been successfully created, and you can now log in to explore all the features we offer.
                 </p>
                 <strong>Service Name: ${service}</strong>

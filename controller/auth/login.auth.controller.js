@@ -29,41 +29,44 @@ module.exports = async function (request, response) {
 
         if (!email || !password) {
             return response.status(400).jsonp({
-                message: "bad request",
-                error: "email and password are required"
+                error: "bad request",
+                message: "email and password are required"
             });
         } else if (!validator.isEmail(email)) {
             return response.status(400).jsonp({
-                message: "bad request",
-                error: "email is invalid!"
+                error: "bad request",
+                message: "email is invalid!"
             });
         } else if (!PasswordMatch || PasswordMatch === false) {
             return response.status(400).jsonp({
-                message: "bad request",
-                error: "password is incorrect!"
+                error: "bad request",
+                message: "password is incorrect!"
             });
         } else if (!FoundUser[0][0]?.length < 1 || !FoundUser[0][0]?.email === email) {
             return response.status(400).jsonp({
-                message: "bad request",
-                error: "user with email does not exist in our databases!"
+                error: "bad request",
+                message: "user with email does not exist in our databases!"
             });
         } else {
             await mailer(email, "New Login Alert for Your Account!", FoundUser[0][0].username);
+
             response.status(201).jsonp({
                 message: "User logged in successfully!",
                 data: {
+                    token: token,
                     login_id: uuid(),
                     account_id: FoundUser[0][0]?.account_id,
                     email: FoundUser[0][0]?.email,
                 },
                 date: format(new Date(), "yyyy-MM-dd"),
+                service_provider: "Web Authentication Service",
             });
         }
     } catch (error) {
         console.error(error);
         return response.status(400).jsonp({
-            message: "bad request",
-            error: "user with email does not exist in our databases!"
+            error: "bad request",
+            message: "user with email does not exist in our databases!"
         });
     }
 }
