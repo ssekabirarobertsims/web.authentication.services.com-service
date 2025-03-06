@@ -4,25 +4,25 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
-    port: 465,
-    host: "smtp.gmail.com",
-    auth: {
-        user: process.env.MAILER,
-        pass: process.env.MAILER_PASSWORD
-    },
-    tls: {
-        rejectUnauthorized: false
-    }
+  service: "gmail",
+  port: 465,
+  host: "smtp.gmail.com",
+  auth: {
+    user: process.env.MAILER,
+    pass: process.env.MAILER_PASSWORD,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
 });
 
 module.exports = async function (to, subject, service) {
-    try {
-        await transporter.sendMail({
-            from: process.env.MAILER,
-            to: to,
-            subject: subject,
-            html: `
+  try {
+    await transporter.sendMail({
+      from: process.env.MAILER,
+      to: to,
+      subject: subject,
+      html: `
                 <h1>Welcome to Authentication Web Services</h1>
                 <p>
                     Welcome to platform! We’re thrilled to have you on board.
@@ -39,11 +39,11 @@ module.exports = async function (to, subject, service) {
                 <br />
                 <p>Best Regards From <a href="https://robertsims.netlify.app/" target="_blank">robert sims</a> </p>
             `,
-            text: subject
-        });
+      text: subject,
+    });
 
-        console.log(`sent email to ${to}`);
-    } catch (error) {
-        console.log(error);
-    }
-}
+    console.log(`sent email to ${to}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
