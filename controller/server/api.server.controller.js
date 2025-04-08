@@ -1,5 +1,5 @@
 "use strict";
-debugger;
+debugger; // update npm pkg
 const express = require("express");
 const application = express();
 const http = require("http");
@@ -11,7 +11,7 @@ const cors = require("cors");
 const compression = require("compression");
 
 // application.use(compression());
-
+ 
 application.use(
   cors({
     origin: "*",
@@ -54,6 +54,20 @@ application.use(
 application.use(
   express.static(require("node:path").join(__dirname, "../../public/photos"))
 );
+
+// fs read static files and static dirs
+const fsp = require("node:fs/promises"); 
+const fs = require("node:fs"); 
+
+fs.readdir(require("node:path").join(__dirname, "../../view/"), (error, data) => error ? console.log("Error while reading dir", error) : console.log("read dir ../../view/"));
+
+fs.readdir(require("node:path").join(__dirname, "../../public/"), (error, data) => error ? console.log("Error while reading dir", error) : console.log("read dir ../../public/"));
+
+fs.readdir(require("node:path").join(__dirname, "../../public/stylesheets/"), (error, data) => error ? console.log("Error while reading dir", error) : console.log("read dir ../../public/stylesheets/"));
+
+fs.readdir(require("node:path").join(__dirname, "../../public/photos/"), (error, data) => error ? console.log("Error while reading dir", error) : console.log("read dir ../../public/photos/"));
+
+// configurations
 application.set("port", 3500);
 
 //

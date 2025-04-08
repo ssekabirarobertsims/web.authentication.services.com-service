@@ -10,7 +10,7 @@
     "build": "npm run build"
   },
   "keywords": [],
-  "author": "https://robertsims.netlify.app/",
+  "author": "https://ssekabirarobertsims.netlify.app/",
   "license": "ISC",
   "description": "auth web services api",
   "dependencies": {
@@ -41,10 +41,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stack-engineers/web.authentication.services.com-service.git"
+    "url": "git+https://github.com/ssekabirarobertsims/web.authentication.services.com-service.git"
   },
   "bugs": {
-    "url": "https://github.com/stack-engineers/web.authentication.services.com-service/issues"
+    "url": "https://github.com/ssekabirarobertsims/web.authentication.services.com-service/issues"
   },
-  "homepage": "https://github.com/stack-engineers/web.authentication.services.com-service#readme"
+  "homepage": "https://github.com/ssekabirarobertsims/web.authentication.services.com-service#readme"
 }
