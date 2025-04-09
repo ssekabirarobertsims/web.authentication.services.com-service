@@ -136,7 +136,7 @@ module.exports = async function (request, response) {
         ]
       );
 
-      await mailer(email, "Service User Account Signup", username);
+      await mailer(email, "User Account Signup", username);
 
       return response.status(201).jsonp({
         message: "User has been created successfully!",
@@ -152,7 +152,7 @@ module.exports = async function (request, response) {
           : "undefined",
         platform: "Web Authentication Services",
       });
-    }
+    } 
   } catch (error) {
     console.error(error);
     response.status(500).jsonp({

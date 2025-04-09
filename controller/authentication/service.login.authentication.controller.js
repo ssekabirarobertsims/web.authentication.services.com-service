@@ -70,11 +70,12 @@ module.exports = async function (request, response) {
         {
           expiresIn: "2d",
         }
-      );
+      ); 
 
       await mailer(
+        FoundServiceInDb[0][0]?.service_owner,
         FoundServiceInDb[0][0]?.service_owner_email,
-        "Service Login",
+        "Web Authentication Service Login",
         FoundServiceInDb[0][0]?.service
       );
 

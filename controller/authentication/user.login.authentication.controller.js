@@ -93,7 +93,7 @@ module.exports = async function (request, response) {
     } else {
       await mailer(
         email,
-        "Service User Account Login",
+        "User Account Login",
         FoundUserInDb[0][0]?.username
       );
 

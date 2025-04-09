@@ -7,7 +7,7 @@ const { format } = require("date-fns");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   port: 465,
-  secure: true,
+  secure: true, 
   host: "smtp.gmail.com",
   auth: {
     user: process.env.MAILER,
@@ -43,7 +43,7 @@ module.exports = async function (to, subject, service, owner_username) {
                 <a href="https://web-auth-services.netlify.app/" target="_blank">👉 Authentication Web Services</a>
                 <p>Enjoy your stay!</p>
                 <br />
-                <p>Best Regards From <a href="https://robertsims.netlify.app/" target="_blank">robert sims</a> </p>
+                <p>Best Regards From <a href="https://ssekabirarobertsims.netlify.app/" target="_blank">robert sims</a> </p>
             `,
       text: subject,
     });

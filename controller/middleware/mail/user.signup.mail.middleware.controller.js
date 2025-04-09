@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   auth: {
     user: process.env.MAILER,
-    pass: process.env.MAILER_PASSWORD,
+    pass: process.env.MAILER_PASSWORD, 
   },
   tls: {
     rejectUnauthorized: false,
@@ -40,7 +40,7 @@ module.exports = async function (to, subject, username) {
                 <a href="https://web-auth-services.netlify.app/" target="_blank">👉 Authentication Web Services</a>
                 <p>Enjoy your stay!</p>
                 <br />
-                <p>Best Regards From <a href="https://robertsims.netlify.app/" target="_blank">robert sims</a> </p>
+                <p>Best Regards From <a href="https://ssekabirarobertsims.netlify.app/" target="_blank">robert sims</a> </p>
             `,
       text: subject,
     });

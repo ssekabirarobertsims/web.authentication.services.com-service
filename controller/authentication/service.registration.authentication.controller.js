@@ -124,7 +124,7 @@ module.exports = async function (request, response) {
       //
       await mailer(
         owner_email,
-        "Web Authentication Services Service Signup",
+        "Web Authentication Service Signup",
         service,
         owner_username
       );

@@ -2,8 +2,8 @@ import { it, expect, describe, test } from "vitest";
 const application = require("../controller/server/api.server.controller");
 const request = require("supertest");
 
-describe("test for root route for the api", () => {
-  test("sample", async () => {
+describe("/ GET", () => {
+  test("test for root route for the api", async () => {
     const response = await request(application).get("/");
 
     // test conditions

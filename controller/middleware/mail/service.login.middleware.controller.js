@@ -15,10 +15,10 @@ const transporter = nodemailer.createTransport({
   },
   tls: {
     rejectUnauthorized: false,
-  },
+  }, 
 });
 
-module.exports = async function (to, subject, service, owner) {
+module.exports = async function (owner, to, subject, service) {
   try {
     await transporter.sendMail({
       from: process.env.MAILER,
@@ -42,7 +42,7 @@ module.exports = async function (to, subject, service, owner) {
                 <a href="https://web-auth-services.netlify.app/" target="_blank">👉 Authentication Web Services</a>
                 <p>Enjoy your stay!</p>
                 <br />
-                <p>Best Regards From <a href="https://robertsims.netlify.app/" target="_blank">robert sims</a></p>
+                <p>Best Regards From <a href="https://ssekabirarobertsims.netlify.app/" target="_blank">robert sims</a></p>
             `,
       text: subject,
     });

@@ -69,7 +69,7 @@ router
 
         if (!FoundService[0][0]) {
           return response.status(Number.parseInt(404)).json({
-            error: "404",
+            error: "Not Found!",
             message: "No such service was found!",
             status_code: (response.statusCode = Number(parseInt(404))),
                     request_id: uuid(),
