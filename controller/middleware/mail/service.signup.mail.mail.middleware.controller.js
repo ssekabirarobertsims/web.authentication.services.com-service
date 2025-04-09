@@ -7,7 +7,7 @@ const { format } = require("date-fns");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   port: 465,
-  secure: true, 
+  secure: true,
   host: "smtp.gmail.com",
   auth: {
     user: process.env.MAILER,

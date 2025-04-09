@@ -15,4 +15,4 @@ router.use(
   require("../authentication/user.signup.authentication.controller")
 );
 
-module.exports = router; 
+module.exports = router;

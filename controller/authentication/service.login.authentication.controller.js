@@ -39,24 +39,24 @@ module.exports = async function (request, response) {
         error: "Bad request",
         message: "Service name and service password are all required!",
         status_code: (response.statusCode = Number(parseInt(400))),
-                request_id: uuid(),
-                date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
+        request_id: uuid(),
+        date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (!FoundServiceInDb) {
       return response.status(400).jsonp({
         error: "Bad request",
         message: "Sorry, such service does not exist in db!",
         status_code: (response.statusCode = Number(parseInt(400))),
-                request_id: uuid(),
-                date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
+        request_id: uuid(),
+        date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (!PasswordMatch || PasswordMatch === false) {
       return response.status(400).jsonp({
         error: "Bad request",
         message: "Provided service password is incorrect!",
         status_code: (response.statusCode = Number(parseInt(400))),
-                request_id: uuid(),
-                date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
+        request_id: uuid(),
+        date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else {
       // create and sign new token for service
@@ -70,7 +70,7 @@ module.exports = async function (request, response) {
         {
           expiresIn: "2d",
         }
-      ); 
+      );
 
       await mailer(
         FoundServiceInDb[0][0]?.service_owner,

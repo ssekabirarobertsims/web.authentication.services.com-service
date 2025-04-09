@@ -5,6 +5,6 @@ module.exports = async function (request, response) {
   response.statusCode = Number.parseInt(404);
 
   response
-      .status(Number.parseInt(404))
-      .sendFile(require("node:path").join(__dirname, "../../../view/404.html"));
+    .status(Number.parseInt(404))
+    .sendFile(require("node:path").join(__dirname, "../../../view/404.html"));
 };

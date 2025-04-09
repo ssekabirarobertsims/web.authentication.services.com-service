@@ -40,7 +40,7 @@ module.exports = async function (request, response) {
       !service_id ||
       typeof service_id === "undefined"
     ) {
-      console.log("error 1")
+      console.log("error 1");
 
       return response.status(400).jsonp({
         message: "Bad request",
@@ -50,7 +50,7 @@ module.exports = async function (request, response) {
         date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (!validator.isEmail(email)) {
-      console.log("error 2")
+      console.log("error 2");
 
       return response.status(400).jsonp({
         message: "Bad request",
@@ -60,7 +60,7 @@ module.exports = async function (request, response) {
         date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (password.length < 8) {
-      console.log("error 3")
+      console.log("error 3");
 
       return response.status(400).jsonp({
         message: "Bad request",
@@ -70,7 +70,7 @@ module.exports = async function (request, response) {
         date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (!validator.isStrongPassword(password)) {
-      console.log("error 4")
+      console.log("error 4");
 
       return response.status(400).jsonp({
         message: "Bad request",
@@ -81,7 +81,7 @@ module.exports = async function (request, response) {
         date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (username.length < 4) {
-      console.log("error 5")
+      console.log("error 5");
 
       return response.status(400).jsonp({
         message: "Bad request",
@@ -91,7 +91,7 @@ module.exports = async function (request, response) {
         date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (username.length > 20) {
-      console.log("error 6")
+      console.log("error 6");
 
       return response.status(400).jsonp({
         message: "Bad request",
@@ -104,7 +104,7 @@ module.exports = async function (request, response) {
       FoundUserEmailInDb[0][0]?.length > 0 ||
       FoundUserEmailInDb[0][0]?.email === email
     ) {
-      console.log("error 7")
+      console.log("error 7");
 
       return response.status(400).jsonp({
         message: "Bad request",
@@ -114,7 +114,7 @@ module.exports = async function (request, response) {
         date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (!FoundServiceWithIdInDb[0][0]) {
-      console.log("error 8")
+      console.log("error 8");
 
       return response.status(400).jsonp({
         message: "Bad request",
@@ -152,14 +152,14 @@ module.exports = async function (request, response) {
           : "undefined",
         platform: "Web Authentication Services",
       });
-    } 
+    }
   } catch (error) {
     console.error(error);
     response.status(500).jsonp({
       message: "internal server error",
       status_code: (response.statusCode = Number(parseInt(500))),
-                          request_id: uuid(),
-                          date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
+      request_id: uuid(),
+      date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       error: error.message,
     });
   }

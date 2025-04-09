@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   auth: {
     user: process.env.MAILER,
-    pass: process.env.MAILER_PASSWORD, 
+    pass: process.env.MAILER_PASSWORD,
   },
   tls: {
     rejectUnauthorized: false,

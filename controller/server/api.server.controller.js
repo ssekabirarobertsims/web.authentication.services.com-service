@@ -11,8 +11,8 @@ const cors = require("cors");
 const compression = require("compression");
 
 application.use(compression());
- 
-application.use(
+
+application.use( 
   cors({
     origin: "*",
     credentials: true,
@@ -58,16 +58,38 @@ application.use(
 );
 
 // fs read static files and static dirs
-const fsp = require("node:fs/promises"); 
-const fs = require("node:fs"); 
+const fsp = require("node:fs/promises");
+const fs = require("node:fs");
 
-fs.readdir(require("node:path").join(__dirname, "../../view/"), (error, data) => error ? console.log("Error while reading dir", error) : console.log("read dir ../../view/"));
+fs.readdir(require("node:path").join(__dirname, "../../view/"), (error, data) =>
+  error
+    ? console.log("Error while reading dir", error)
+    : console.log("read dir ../../view/")
+);
 
-fs.readdir(require("node:path").join(__dirname, "../../public/"), (error, data) => error ? console.log("Error while reading dir", error) : console.log("read dir ../../public/"));
+fs.readdir(
+  require("node:path").join(__dirname, "../../public/"),
+  (error, data) =>
+    error
+      ? console.log("Error while reading dir", error)
+      : console.log("read dir ../../public/")
+);
 
-fs.readdir(require("node:path").join(__dirname, "../../public/stylesheets/"), (error, data) => error ? console.log("Error while reading dir", error) : console.log("read dir ../../public/stylesheets/"));
+fs.readdir(
+  require("node:path").join(__dirname, "../../public/stylesheets/"),
+  (error, data) =>
+    error
+      ? console.log("Error while reading dir", error)
+      : console.log("read dir ../../public/stylesheets/")
+);
 
-fs.readdir(require("node:path").join(__dirname, "../../public/photos/"), (error, data) => error ? console.log("Error while reading dir", error) : console.log("read dir ../../public/photos/"));
+fs.readdir(
+  require("node:path").join(__dirname, "../../public/photos/"),
+  (error, data) =>
+    error
+      ? console.log("Error while reading dir", error)
+      : console.log("read dir ../../public/photos/")
+);
 
 // configurations
 application.set("port", 3500);

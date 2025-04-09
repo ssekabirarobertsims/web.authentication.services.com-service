@@ -91,11 +91,7 @@ module.exports = async function (request, response) {
         date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else {
-      await mailer(
-        email,
-        "User Account Login",
-        FoundUserInDb[0][0]?.username
-      );
+      await mailer(email, "User Account Login", FoundUserInDb[0][0]?.username);
 
       return response.status(200).jsonp({
         message: "User logged in successfully!",
@@ -117,8 +113,8 @@ module.exports = async function (request, response) {
     return response.status(500).jsonp({
       error: "Bad request",
       status_code: (response.statusCode = Number(parseInt(500))),
-                          request_id: uuid(),
-                          date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
+      request_id: uuid(),
+      date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       message: "User with email does not exist in our databases!",
     });
   }

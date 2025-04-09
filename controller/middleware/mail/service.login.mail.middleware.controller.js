@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
   },
   tls: {
     rejectUnauthorized: false,
-  }, 
+  },
 });
 
 module.exports = async function (owner, to, subject, service) {
