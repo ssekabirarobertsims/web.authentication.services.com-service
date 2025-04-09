@@ -6,10 +6,11 @@
       type="image/svg+xml"
       href="/photos/banner_hu_bd8330c75c01695c.webp"
     />
+    <meta name="theme" content="#101010" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="developer" content="https://ssekabirarobertsims.netlify.app" />
-    <meta name="version" content="v1.0.3" />
+    <meta name="version" content="v1.0.4" />
     <meta name="tech" content="mern stack" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,46 +26,18 @@
       rel="stylesheet"
     />
     <title>Web Authentication Services</title>
-    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <link rel="stylesheet" href="/index.css" />
     <script>
-      document.addEventListener("DOMContentLoaded", (event) => {
+      window.document.addEventListener("DOMContentLoaded", (event) => {
         console.log("DOM Content Loaded!");
       });
 
-      const element = window.document.querySelector(
-        ".site-main-page-cookies-warning-component"
-      );
-      (typeof window.localStorage.getItem("cookies_enabled") !== "undefined") |
-      null
-        ? ""
-        : (element.style.display = "none");
+      window.localStorage.setItem("cookies_enabled", "true");
 
-      window.document.querySelector(".button", (event) => {
-        window.localStorage.setItem("cookies_enabled", "true");
-        element.style.display = "none";
-      });
     </script>
   </head>
   <body>
     <main>
-      <aside class="site-main-page-cookies-warning-component">
-        <article
-          class="site-main-page-cookies-warning-component-content-wrapper"
-        >
-          <h1>Cookies</h1>
-          <h2>Site Cookies Settings</h2>
-          <p>
-            Web authentication developer tool uses cookies to improve on the
-            functionality of this developer tool. Allowing cookies can be help
-            to boost performance and improve user experiences sunt nesciunt
-            possimus exercitationem, molestias unde, expedita ut enim quae
-            similique dolores. Facilis at temporibus minima blanditiis, corrupti
-            perferendis tenetur dignissimos vitae ex quisquam aperiam veniam
-            ipsum nesciunt.
-          </p>
-          <button type="button" class="button">Allow Cookies</button>
-        </article>
-      </aside>
       <section>
         <!-- <h1>The ultimate starter web authentication api free services for your project.</h1> -->
         <h1>
@@ -90,6 +63,23 @@
           </a>
         </div>
       </section>
+      <aside class="site-main-page-cookies-warning-component">
+        <article
+          class="site-main-page-cookies-warning-component-content-wrapper"
+        >
+          <h1>Cookies</h1>
+          <h2>Site Cookies Settings</h2>
+          <p>
+            Web authentication developer tool uses cookies to improve on the
+            functionality of this developer tool. Allowing cookies can be help
+            to boost performance and improve user experiences sunt nesciunt
+            possimus exercitationem, molestias unde, expedita ut enim quae
+            similique dolores. Facilis at temporibus minima blanditiis, corrupti
+            perferendis tenetur dignissimos vitae ex quisquam aperiam veniam
+            ipsum nesciunt.
+          </p>
+        </article>
+      </aside>
     </main>
   </body>
 </html>
