@@ -158,6 +158,8 @@ module.exports = async function (request, response) {
     response.status(500).jsonp({
       message: "internal server error",
       status_code: (response.statusCode = Number(parseInt(500))),
+                          request_id: uuid(),
+                          date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       error: error.message,
     });
   }

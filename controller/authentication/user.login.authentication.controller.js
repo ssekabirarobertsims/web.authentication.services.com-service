@@ -117,6 +117,8 @@ module.exports = async function (request, response) {
     return response.status(500).jsonp({
       error: "Bad request",
       status_code: (response.statusCode = Number(parseInt(500))),
+                          request_id: uuid(),
+                          date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       message: "User with email does not exist in our databases!",
     });
   }

@@ -31,52 +31,79 @@ module.exports = async function (request, response) {
       !project
     ) {
       return response.status(400).jsonp({
-        message: "bad request",
+        message: "Bad request",
         error:
           "service, owner_username, owner_email, service_password and project are all required!",
+        status_code: (response.statusCode = Number(parseInt(400))),
+        request_id: uuid(),
+        date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (!validator.isEmail(owner_email)) {
       return response.status(400).jsonp({
-        message: "bad request",
-        error: "owner_email is invalid!",
+        message: "Bad request",
+        error: "Provided service owner email is invalid!",
+        status_code: (response.statusCode = Number(parseInt(400))),
+        request_id: uuid(),
+        date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (service.length < 4) {
       return response.status(400).jsonp({
-        message: "bad request",
+        message: "Bad request",
         error: "service name must be at least 4 characters or more!",
+        status_code: (response.statusCode = Number(parseInt(400))),
+        request_id: uuid(),
+        date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (service.length > 20) {
       return response.status(400).jsonp({
-        message: "bad request",
-        error: "service name must be at most 20 characters or less!",
+        message: "Bad request",
+        error: "Provided service name must be at most 20 characters or less!",
+        status_code: (response.statusCode = Number(parseInt(400))),
+        request_id: uuid(),
+        date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (owner_username.length < 4) {
       return response.status(400).jsonp({
-        message: "bad request",
-        error: "owner_username must be at least 4 characters or more!",
+        message: "Bad request",
+        error: "Provided owner username must be at least 4 characters or more!",
+        status_code: (response.statusCode = Number(parseInt(400))),
+        request_id: uuid(),
+        date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (owner_username.length > 20) {
       return response.status(400).jsonp({
-        message: "bad request",
-        error: "owner_username must be at most 20 characters or less!",
+        message: "Bad request",
+        error: "Provided owner username must be at most 20 characters or less!",
+        status_code: (response.statusCode = Number(parseInt(400))),
+        request_id: uuid(),
+        date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (project.length < 4) {
       return response.status(400).jsonp({
-        message: "bad request",
-        error: "project name must be at least 4 characters or more!",
+        message: "Bad request",
+        error: "Provided project name must be at least 4 characters or more!",
+        status_code: (response.statusCode = Number(parseInt(400))),
+        request_id: uuid(),
+        date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (project.length > 20) {
       return response.status(400).jsonp({
-        message: "bad request",
-        error: "project name must be at most 20 characters or less!",
+        message: "Bad request",
+        error: "Provided project name must be at most 20 characters or less!",
+        status_code: (response.statusCode = Number(parseInt(400))),
+        request_id: uuid(),
+        date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else if (
       FoundService[0][0]?.length > 0 ||
       FoundService[0][0]?.service === service
     ) {
       return response.status(400).jsonp({
-        message: "bad request",
-        error: "service already exists in our databases!",
+        message: "Bad request",
+        error: "Service already exists in our databases!",
+        status_code: (response.statusCode = Number(parseInt(400))),
+        request_id: uuid(),
+        date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
       });
     } else {
       const description = "sample description";
@@ -89,7 +116,7 @@ module.exports = async function (request, response) {
           hash,
           owner_username,
           owner_email,
-          description,
+          String(description).toLocaleLowerCase(),
           project,
           format(new Date(), "yyyy-MM-dd"),
         ]
@@ -97,29 +124,34 @@ module.exports = async function (request, response) {
       //
       await mailer(
         owner_email,
-        "Web Authentication Services Service Registration",
+        "Web Authentication Services Service Signup",
         service,
         owner_username
       );
       //
-      response.status(201).jsonp({
+      return response.status(201).jsonp({
         message: "Service created successfully!",
         data: {
           service: service,
           owner_username: owner_username,
           owner_email: owner_email,
           project: project,
-          description: description,
+          description: String(description).toLocaleLowerCase(),
         },
         date: format(new Date(), "yyyy-MM-dd"),
-        service_provider: "Web Authentication Services",
+        status_code: (response.statusCode = Number(parseInt(201))),
+        request_id: uuid(),
+        platform: "Web Authentication Services",
       });
     }
   } catch (error) {
     console.log(error);
-    response.status(Number.parseInt(500)).json({
+    return response.status(Number.parseInt(500)).json({
       error: "Internal Server Error",
       message: "Error while creating service!",
+      status_code: (response.statusCode = Number(parseInt(500))),
+      request_id: uuid(),
+      date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
     });
   }
 };
