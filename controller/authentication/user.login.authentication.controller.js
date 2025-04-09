@@ -6,7 +6,7 @@ const pool_connection = require("../../model/connection/model.connection");
 const { v4: uuid } = require("uuid");
 const validator = require("validator");
 require("dotenv").config();
-const mailer = require("../middleware/mail/login.mail.middleware.controller");
+const mailer = require("../middleware/mail/user.login.mail.middleware.controller");
 const format = require("date-fns").format;
 
 module.exports = async function (request, response) {

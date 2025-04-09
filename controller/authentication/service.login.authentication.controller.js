@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const { v4: uuid } = require("uuid");
 const validator = require("validator");
 require("dotenv").config();
-const mailer = require("../middleware/mail/service.login.middleware.controller");
+const mailer = require("../middleware/mail/service.login.mail.middleware.controller");
 const format = require("date-fns").format;
 
 module.exports = async function (request, response) {
