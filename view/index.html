@@ -1,46 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="icon" type="image/svg+xml" href="/photos/banner_hu_bd8330c75c01695c.webp" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/photos/banner_hu_bd8330c75c01695c.webp"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="developer" content="https://ssekabirarobertsims.netlify.app" />
     <meta name="version" content="v1.0.3" />
     <meta name="tech" content="mern stack" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Liter&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Liter&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap"
+      rel="stylesheet"
+    />
     <title>Web Authentication Services</title>
     <link rel="stylesheet" href="/stylesheets/index.css" />
-</head>
-<body>
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        console.log("DOM Content Loaded!");
+      });
+
+      const element = window.document.querySelector(
+        ".site-main-page-cookies-warning-component"
+      );
+      (typeof window.localStorage.getItem("cookies_enabled") !== "undefined") |
+      null
+        ? ""
+        : (element.style.display = "none");
+
+      window.document.querySelector(".button", (event) => {
+        window.localStorage.setItem("cookies_enabled", "true");
+        element.style.display = "none";
+      });
+    </script>
+  </head>
+  <body>
     <main>
-        <section>
-            <!-- <h1>The ultimate starter web authentication api free services for your project.</h1> -->
-            <h1>THE ULTIMATE STARTER WEB AUTHENTICATION API FREE SERVICES FOR YOUR PROJECT.</h1>
-            <p>
-                Handle and make safe and secure authentications for users for your
-            ui sites design without handling any backend codes with just one
-            platform in one secure place like this.
-            </p>
-            <br>
-            <a href="https://web-auth-services.netlify.app" target="_blank">
-                <button type="button">Get Started Free</button>
-            </a>
-            <br>
-            <br>
-            <img src="/photos/banner_hu_bd8330c75c01695c.webp" alt="">
-            <div class="site-developer-navigation-component">
-                <p>Need help from me?</p>
-                <a href="http://ssekabirarobertsims.netlify.app" target="_blank">
-                  <img src="/photos/ssekabirarobertsims.jpg" alt="" />
-                </a>    
-            </div>
-        </section> 
+      <aside class="site-main-page-cookies-warning-component">
+        <article
+          class="site-main-page-cookies-warning-component-content-wrapper"
+        >
+          <h1>Cookies</h1>
+          <h2>Site Cookies Settings</h2>
+          <p>
+            Web authentication developer tool uses cookies to improve on the
+            functionality of this developer tool. Allowing cookies can be help
+            to boost performance and improve user experiences sunt nesciunt
+            possimus exercitationem, molestias unde, expedita ut enim quae
+            similique dolores. Facilis at temporibus minima blanditiis, corrupti
+            perferendis tenetur dignissimos vitae ex quisquam aperiam veniam
+            ipsum nesciunt.
+          </p>
+          <button type="button" class="button">Allow Cookies</button>
+        </article>
+      </aside>
+      <section>
+        <!-- <h1>The ultimate starter web authentication api free services for your project.</h1> -->
+        <h1>
+          THE ULTIMATE STARTER WEB AUTHENTICATION API FREE SERVICES FOR YOUR
+          PROJECT.
+        </h1>
+        <p>
+          Handle and make safe and secure authentications for users for your ui
+          sites design without handling any backend codes with just one platform
+          in one secure place like this.
+        </p>
+        <br />
+        <a href="https://web-auth-services.netlify.app" target="_blank">
+          <button type="button">Get Started Free</button>
+        </a>
+        <br />
+        <br />
+        <img src="/photos/banner_hu_bd8330c75c01695c.webp" alt="" />
+        <div class="site-developer-navigation-component">
+          <p>Need help from me?</p>
+          <a href="http://ssekabirarobertsims.netlify.app" target="_blank">
+            <img src="/photos/robertsims.jpg" alt="" />
+          </a>
+        </div>
+      </section>
     </main>
-</body>
+  </body>
 </html>

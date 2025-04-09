@@ -97,12 +97,12 @@ router
 // test api routes
 router
   .route("/service/registration")
-  .post(require("../auth/services.registration.controller"));
+  .post(require("../authentication/services.registration.controller"));
 router
   .route("/service/login")
-  .post(require("../auth/services.login.controller"));
+  .post(require("../authentication/services.login.controller"));
 router
   .route("/service/logout")
-  .post(require("../auth/service.logout.auth.controller"));
+  .post(require("../authentication/service.logout.auth.controller"));
 
 module.exports = router;

@@ -10,7 +10,7 @@ require("dotenv").config();
 const cors = require("cors");
 const compression = require("compression");
 
-// application.use(compression());
+application.use(compression());
  
 application.use(
   cors({
@@ -34,6 +34,8 @@ application.use(express.urlencoded({ extended: Boolean(false) }));
 application.use(express.json());
 application.use(bodyParser.json());
 application.use(cookieParser());
+
+// middleware to serve server static files
 application.use(
   express.static(require("node:path").join(__dirname, "../../view/"))
 );
