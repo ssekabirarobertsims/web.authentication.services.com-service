@@ -1,14 +1,14 @@
 "use strict";
 debugger;
 const nodemailer = require("nodemailer");
-const { format } = require("date-fns");
 require("dotenv").config();
+const { format } = require("date-fns");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
+  secure: true,
   port: 465,
   host: "smtp.gmail.com",
-  secure: true,
   auth: {
     user: process.env.MAILER,
     pass: process.env.MAILER_PASSWORD,
@@ -25,23 +25,23 @@ module.exports = async function (to, subject, username) {
       to: to,
       subject: subject,
       html: `
-                <h1>Account Login!</h1>
-                <p>Hi ${username}, you have been able to log into your account successfully on ${format(
-        new Date(),
-        "yyyy-MM-dd"
-      )}</p>
+                <p>Dear  ${String(
+                  username
+                ).toLocaleLowerCase()}, we’re thrilled and glad to have you on board with us.
+                    Your account has been successfully created, and you can now log in to explore all the features we offer.
+                </p>
                 <strong>Username: ${username}</strong>
                 <strong>Email: ${to}</strong>
                 <strong>Date: ${format(new Date(), "yyyy-MM-dd")}</strong>
                 <strong>Service Provider: <a href="https://web-auth-services.netlify.app" target="_blank">Web Authentication Services</a></strong>
                 <br />
-                <p>Thank you for using our platform!</p>
-                <br />
+                <p>If you have any questions, feel free to reply to this email or contact our support developer at robertsims7076@gmail.com.</p>
+                <span>Welcome aboard,</p>
                 <a href="https://web-auth-services.netlify.app/" target="_blank">👉 Authentication Web Services</a>
                 <p>Enjoy your stay!</p>
                 <br />
-                <p>Best Regards From <a href="https://robertsims.netlify.app/" target="_blank">robert sims</a> </p>
-                `,
+                <p>Best Regards From <a href="https://ssekabirarobertsims.netlify.app/" target="_blank">robert sims</a> </p>
+            `,
       text: subject,
     });
 

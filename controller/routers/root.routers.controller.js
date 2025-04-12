@@ -6,12 +6,13 @@ const router = express.Router();
 router.use(
   "/user/account/login",
   require("../middleware/jwt/jwt.middleware.controller"),
-  require("../auth/login.auth.controller")
+  require("../authentication/user.login.authentication.controller")
 );
+
 router.use(
   "/user/account/signup",
   require("../middleware/jwt/jwt.middleware.controller"),
-  require("../auth/signup.auth.controller")
+  require("../authentication/user.signup.authentication.controller")
 );
 
-module.exports = router; 
+module.exports = router;

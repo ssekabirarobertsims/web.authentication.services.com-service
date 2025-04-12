@@ -1,11 +1,12 @@
 "use strict";
 debugger;
 const express = require("express");
+const { v4: uuid } = require("uuid");
 const router = express.Router();
 const pool_connection = require("../../model/connection/model.connection");
 const { format } = require("date-fns");
 const apicache = require("apicache");
-const cache = apicache.middleware; 
+const cache = apicache.middleware;
 
 router
   .route("/registered/services/:id")
@@ -23,27 +24,35 @@ router
         );
 
         if (!FoundService[0][0]) {
-          response.status(Number.parseInt(404)).json({
+          return response.status(Number.parseInt(404)).json({
             error: "404",
             message: "No such service was found!",
+            status_code: (response.statusCode = Number(parseInt(404))),
+            request_id: uuid(),
+            date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
           });
         } else {
-            response.status(Number.parseInt(200))
-                .json({
-                    message: "1 service found!",
-                    service: FoundService[0][0]?.service,
-                    service_owner: FoundService[0][0]?.service_owner,
-                    service_id: FoundService[0][0]?.service_id,
-                    description: FoundService[0][0]?.description,
-                    project_name: FoundService[0][0]?.project_name,
-                    _date: FoundService[0][0]?._date,
-                });
+          return response.status(Number.parseInt(200)).json({
+            message: "1 service found!",
+            service: FoundService[0][0]?.service,
+            service_owner: FoundService[0][0]?.service_owner,
+            service_id: FoundService[0][0]?.service_id,
+            description: FoundService[0][0]?.description,
+            project_name: FoundService[0][0]?.project_name,
+            _date: FoundService[0][0]?._date,
+            status_code: (response.statusCode = Number(parseInt(200))),
+            request_id: uuid(),
+            date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
+          });
         }
       } catch (error) {
         console.log(error);
-        response.status(Number.parseInt(500)).json({
+        return response.status(Number.parseInt(500)).json({
           error: "Internal Server Error",
           message: "Error while fetching services!",
+          status_code: (response.statusCode = Number(parseInt(500))),
+          request_id: uuid(),
+          date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
         });
       }
     }
@@ -54,14 +63,19 @@ router
       response.contentType = "Application/json";
       response.statusCode = Number.parseInt(200);
 
-    try {
-        const FoundService = await pool_connection.query("SELECT * FROM services WHERE service_id = ?", [request.params.id]);
-        console.log(FoundService[0][0]);
+      try {
+        const FoundService = await pool_connection.query(
+          "SELECT * FROM services WHERE service_id = ?",
+          [request.params.id]
+        );
 
         if (!FoundService[0][0]) {
-          response.status(Number.parseInt(404)).json({
-            error: "404",
+          return response.status(Number.parseInt(404)).json({
+            error: "Not Found!",
             message: "No such service was found!",
+            status_code: (response.statusCode = Number(parseInt(404))),
+            request_id: uuid(),
+            date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
           });
         } else {
           await pool_connection.query(
@@ -71,8 +85,8 @@ router
             [FoundService[0][0].service_id]
           );
 
-          response.status(Number.parseInt(200)).json({
-            message: `"${FoundService[0][0]?.service}" service has been deleted permanently!`,
+          return response.status(Number.parseInt(200)).json({
+            message: `"${FoundService[0][0]?.service}" service has been deleted permanently from db!`,
             date: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
             data: {
               service: service,
@@ -82,13 +96,18 @@ router
               service_description: FoundService[0][0]?.description,
               project: FoundService[0][0]?.project_name,
             },
+            status_code: (response.statusCode = Number(parseInt(400))),
+            request_id: uuid(),
           });
         }
       } catch (error) {
         console.log(error);
-        response.status(Number.parseInt(500)).json({
+        return response.status(Number.parseInt(500)).json({
           error: "Internal Server Error",
           message: "Error while fetching services!",
+          status_code: (response.statusCode = Number(parseInt(500))),
+          request_id: uuid(),
+          date: format(new Date(), "yyyy-MM-dd\tHH:mm:ss"),
         });
       }
     }
@@ -97,12 +116,14 @@ router
 // test api routes
 router
   .route("/service/registration")
-  .post(require("../auth/services.registration.controller"));
+  .post(
+    require("../authentication/service.registration.authentication.controller")
+  );
 router
   .route("/service/login")
-  .post(require("../auth/services.login.controller"));
+  .post(require("../authentication/service.login.authentication.controller"));
 router
   .route("/service/logout")
-  .post(require("../auth/service.logout.auth.controller"));
+  .post(require("../authentication/service.logout.authentication.controller"));
 
 module.exports = router;
